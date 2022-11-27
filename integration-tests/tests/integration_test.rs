@@ -11766,6 +11766,16 @@ fn test_issue_1170() {
     run_test("", hdr, quote! {}, &["Arch"], &[]);
 }
 
+#[test]
+fn test_return_const() {
+    let hdr = indoc! {
+        "inline const int get_value() {
+            return 3;
+        }"
+    };
+    run_test("", hdr, quote! {}, &["get_value"], &[]);
+}
+
 // Yet to test:
 // - Ifdef
 // - Out param pointers
