@@ -11767,13 +11767,25 @@ fn test_issue_1170() {
 }
 
 #[test]
-fn test_return_const() {
+fn test_return_const_int() {
     let hdr = indoc! {
         "inline const int get_value() {
             return 3;
         }"
     };
     run_test("", hdr, quote! {}, &["get_value"], &[]);
+}
+
+
+#[test]
+fn test_return_const_struct() {
+    let hdr = indoc! {
+        "struct A { int a; };
+        inline const A get_value() {
+            return A { 3 };
+        }"
+    };
+    run_test("", hdr, quote! {}, &["get_value", "A"], &[]);
 }
 
 // Yet to test:
